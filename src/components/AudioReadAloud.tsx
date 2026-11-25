@@ -829,16 +829,19 @@ export function AudioReadAloud({
       return;
     }
 
-    const isStandaloneOffline =
+    const isStaticOrOfflineHost =
       typeof window !== 'undefined' &&
       (window.location.protocol === 'file:' ||
         window.location.protocol === 'about:' ||
+        window.location.hostname.endsWith('.github.io') ||
         (window as Window & { __SINGLE_FILE_OFFLINE__?: boolean })
           .__SINGLE_FILE_OFFLINE__ === true);
 
-    if (isStandaloneOffline) {
+    if (isStaticOrOfflineHost) {
       const started = startBrowserSpeech(
-        'Playing with built-in device voice (offline HTML mode).',
+        window.location.hostname.endsWith('.github.io')
+          ? 'Playing with built-in browser voice.'
+          : 'Playing with built-in device voice (offline HTML mode).',
       );
       if (!started) {
         setStatus('error');

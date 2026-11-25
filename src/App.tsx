@@ -240,6 +240,7 @@ export default function App() {
             <span>Outcomes S.O. 2.9 · S.O. 3.3 · S.O. 3.5</span>
             {typeof window !== 'undefined' &&
               window.location.protocol !== 'file:' &&
+              !window.location.hostname.endsWith('.github.io') &&
               !(window as Window & { __SINGLE_FILE_OFFLINE__?: boolean })
                 .__SINGLE_FILE_OFFLINE__ && (
                 <a
